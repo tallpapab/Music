@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Polly Wolly Doodle</title>
+<script src="../../Sites/baw/js/jquery-1.6.2.min.js"></script>
+<script src="Transposer.js"></script>
+<script>
+jQuery(document).ready(function () {
+    aTransposer = function () {
+
+        var newTransposer = {
+
+            /**
+             * add a couple buttons for transposing up and down half steps.
+             * @param theHostElement a DOM elements.
+             *        The buttons will straddle the inner HTML of this element.
+             */
+            addButtons: function (theHostElement) {
+                var prevHTML, ourButtons;
+                prevHTML = jQuery(theHostElement).html();
+                jQuery(theHostElement).html('<input class="tbutton" type="button" value="<">' +
+                    prevHTML +
+                    '<input class="tbutton" type="button" value=">">');
+                ourButtons = jQuery('input.tbutton');
+                jQuery(ourButtons[0]).click(function (theEvent) {
+                    $('.chord').elb_music_transpose(-1); // transpose down.
+                });
+                jQuery(ourButtons[1]).click(function (theEvent) {
+                    $('.chord').elb_music_transpose(1); // transpose up.
+                });
+            }
+
+        }
+
+
+        return newTransposer;
+
+    };
+
+    /**
+     * Initialize a transposer
+     * if an element with id="musicalKey" can be found.
+     */
+    var ourKeyElement, ourTransposer;
+    ourKeyElement = jQuery("#musicalKey");
+    ourTransposer = aTransposer();
+    if (ourKeyElement) {
+        ourTransposer.addButtons(ourKeyElement);
+    }
+});
+</script>
+</head>
+<body>
+<p> This is an example of using
+    <a href="http://BlossomAssociates.net/Music/Songbook/"> Eric Blossom's chord transposer</a> plugin for jQuery.
+    Note that you will have to point to your copy of jQuery for this to work.
+    With it one can transpose chords in a song sheet containing chords and lyrics.
+</p>
+
+<h1 class="title">Polly Wolly Doodle</h1>
+<p id="musicalKey" class="annotation">in <span class="chord">D</span></p>
+
+<br>
+<table>
+<tr><td class="chord">D&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">O, I went down south for to see my Sal,</td></tr>
+</table>
+<table>
+<tr><td class="chord">D&nbsp;</td><td class="chord">A&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">Sing polly wolly doodle all </td><td class="lyric">day,</td></tr>
+</table>
+<table>
+<tr><td class="chord">A&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">My Sally she’s a spunky gal,</td></tr>
+</table>
+<table>
+<tr><td class="chord">A&nbsp;</td><td class="chord">D&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">Sing polly wolly doodle all the </td><td class="lyric">day.</td></tr>
+</table>
+
+</body>
+</html>
