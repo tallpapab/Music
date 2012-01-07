@@ -1,0 +1,19 @@
+{
+    "name": "elb_music_transposer",
+    "version": "1.0",
+    "title": "jQuery Music Transposer",
+    "author": {
+        "name": "Eric Blossom",
+        "url": "https://github.com/tallpapab"
+    },
+    "licenses": [
+        { "type": "cc", "url": "http://creativecommons.org/licenses/by-nc-nd/3.0/" }
+    ],
+    "dependencies": {
+        "jquery": "1"
+    },
+    "description": "Allows musical transcription of chords in a song sheet.",
+    "keywords": [ "chords", "keys", "transpose" ],
+    "homepage": "https://github.com/tallpapab/Music",
+    "files": [ README, "Transposer.js" ]
+}
