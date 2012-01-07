@@ -2,5 +2,8 @@ Javascript for Song Sheets
 
 Use this jQuery plugin to transpose chords in a song in your HTML pages.
 
+- Transpose.js contains the plugin.
+- PollyWollyDoodle.html contains an example of using it.
+
 Eric Blossom January 2012
 http://BlossomAssociates.net/Music/Songbook/
