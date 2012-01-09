@@ -34,10 +34,10 @@
                         x += chordLetters.length;
                     }
                     x %= chordLetters.length;
-                    if (-1 < h.indexOf('m') && !h.match('maj')) {
+                    if (-1 < h.indexOf('m') && !h.match('maj|dom')) { // then it's a minor (or diminished) chord.
                         this.innerHTML = h.replace(m[0], minorChords[x]);
                     }
-                    else {
+                    else { // it's a major chord.
                         this.innerHTML = h.replace(m[0], chords[x]);
                     }
                 }
