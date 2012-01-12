@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wayfaring Stranger</title>
+<script src="jquery-1.6.2.min.js"></script>
+<script src="Transposer.js"></script>
+<script>
+jQuery(document).ready(function () {
+    aTransposer = function () {
+
+        var newTransposer = {
+
+            /**
+             * add a couple buttons for transposing up and down half steps.
+             * @param theHostElement a DOM elements.
+             *        The buttons will straddle the inner HTML of this element.
+             */
+            addButtons: function (theHostElement) {
+                var prevHTML, ourButtons;
+                prevHTML = jQuery(theHostElement).html();
+                jQuery(theHostElement).html('<input class="tbutton" type="button" value="<">' +
+                    prevHTML +
+                    '<input class="tbutton" type="button" value=">">');
+                ourButtons = jQuery('input.tbutton');
+                jQuery(ourButtons[0]).click(function (theEvent) {
+                    $('.chord').elb_music_transpose(-1); // transpose down.
+                });
+                jQuery(ourButtons[1]).click(function (theEvent) {
+                    $('.chord').elb_music_transpose(1); // transpose up.
+                });
+            }
+
+        }
+
+
+        return newTransposer;
+
+    };
+
+    /**
+     * Initialize a transposer
+     * if an element with id="musicalKey" can be found.
+     */
+    var ourKeyElement, ourTransposer;
+    ourKeyElement = jQuery("#musicalKey");
+    ourTransposer = aTransposer();
+    if (ourKeyElement) {
+        ourTransposer.addButtons(ourKeyElement);
+    }
+});
+</script>
+</head>
+<body>
+<h1 class="title">Wayfaring Stranger</h1>
+<p id="musicalKey" class="annotation">in <span class="chord">Cm</span></p>
+
+<br>
+<table>
+<tr><td class="chord"></td><td class="chord">Cm&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">I am  a </td><td class="lyric">poor      wayfaring stranger,</td></tr>
+</table>
+<table>
+<tr><td class="chord"></td><td class="chord">Fm&nbsp;</td><td class="chord">Cm&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">A  traveling </td><td class="lyric">thru    this world of </td><td class="lyric">woe,</td></tr>
+</table>
+<table>
+<tr><td class="chord"></td><td class="chord">Cm&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">Yet there's no </td><td class="lyric">sickness,   toil, nor danger,</td></tr>
+</table>
+<table>
+<tr><td class="chord"></td><td class="chord">Fm&nbsp;</td><td class="chord">G7&nbsp;</td><td class="chord">Cm&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">In that fair </td><td class="lyric">land  </td><td class="lyric">   to which I </td><td class="lyric">go.</td></tr>
+</table>
+
+<br>
+<div class="chorus">
+<table>
+<tr><td class="chord"></td><td class="chord">Ab&nbsp;</td><td class="chord">Eb&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">I'm going </td><td class="lyric">home    to see my </td><td class="lyric">Father,</td></tr>
+</table>
+<table>
+<tr><td class="chord"></td><td class="chord">Ab&nbsp;</td><td class="chord">Eb&nbsp;</td><td class="chord">G7&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">I'm going </td><td class="lyric">there... </td><td class="lyric">   no more to </td><td class="lyric">roam,</td></tr>
+</table>
+<table>
+<tr><td class="chord"></td><td class="chord">Cm&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">I'm only </td><td class="lyric">going over Jordan,</td></tr>
+</table>
+<table>
+<tr><td class="chord"></td><td class="chord">Fm&nbsp;</td><td class="chord">G7&nbsp;</td><td class="chord">Cm&nbsp;</td><td class="chord"></td></tr>
+<tr><td class="lyric">I'm only </td><td class="lyric">go-     </td><td class="lyric">in' over </td><td class="lyric">home.</td></tr>
+</table>
+</div>
+
+</body>
+</html>
