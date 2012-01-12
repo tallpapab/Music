@@ -4,11 +4,11 @@ Use this jQuery plugin to transpose chords in a song in your HTML pages.
 
 - Transpose.js contains the plugin.
 - PollyWollyDoodle.html contains an example of using it.
+- WayfaringStranger.html contains a minor key example.
 - package.json for plugins.jQuery.com
 
-BUG: It doesn't handle chord inversions like "D/A" gracefully.
-A workaround is to use <span class="chord">D</span>/<span class="chord">A</span>
-instead of <span class="chord">D/A</span>.
+Note that this does not try to figure out a song's tonality.
+You must supply a key (see example HTML) for correct transposition of some enharmonics.
 
 c.f. https://github.com/jessegavin/jQuery-Chord-Transposer
      https://github.com/jperkin/py-chordpro/
