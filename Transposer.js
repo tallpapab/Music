@@ -48,7 +48,7 @@
                 'Dm':  ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
             },
             chords = majorChords,
-            aChord = /[A-G][#b\u266d\u266f]?/,
+            aChord = /[A-G][#b\u266d\u266f]?/g,
             key,
             keyName = function(sloppyName) {
                 sloppyName = sloppyName.replace('#', '♯').replace('b', '♭');
@@ -59,46 +59,47 @@
             };
         return this.each(function (theIndex, theElement) {
             var h = this.innerHTML,
-                m,
-                x;
+                i, m, x;
             if ($(this).hasClass('key')) {
-                h = keyName(h);
-                if (h[h.length-1] === 'm' ) {
+                key = keyName(h);
+                if (key[key.length-1] === 'm' ) {
                     chords = minorChords;
                 }
                 else {
                     chords = majorChords;
                 }
-                key = h;
             }
             m = h.match(aChord);
             if (m) {
-                x = chordLetters.search(m[0][0]);
-                if (-1 < x) {
-                    if (m[0].match('.[#\u266f]')) {
-                        x += 1;
-                    }
-                    if (m[0].match('.[b\u266d]')) {
-                        x -= 1;
-                    }
-                    x += theHalfSteps;
-                    while (x < 0) { /* JavaScript doesn't do modulo negative numbers. */
-                        x += chordLetters.length;
-                    }
-                    x %= chordLetters.length;
-                    if (!key) { // then no key was given in the input.
-                        // Guess based on chord.
-                        if (-1 < h.indexOf('m') && !h.match('maj|dom')) { // then it's a minor (or diminished) chord.
-                            this.innerHTML = h.replace(m[0], minorChords[x]);
+                for (i = 0; i < m.length; i++) {
+                    x = chordLetters.search(m[i][0]);
+                    if (-1 < x) {
+                        if (m[i].match('.[#\u266f]')) {
+                            x += 1;
                         }
-                        else { // it's a major chord.
-                            this.innerHTML = h.replace(m[0], majorChords[x]);
+                        if (m[i].match('.[b\u266d]')) {
+                            x -= 1;
                         }
-                    }
-                    else { // the proper key has been set.
-                        this.innerHTML = h.replace(m[0], chords[x]);
+                        x += theHalfSteps;
+                        while (x < 0) { /* JavaScript doesn't do modulo negative numbers. */
+                            x += chordLetters.length;
+                        }
+                        x %= chordLetters.length;
+                        if (!key) { // then no key was given in the input.
+                            // Guess based on chord.
+                            if (-1 < h.indexOf('m') && !h.match('maj|dom')) { // then it's a minor (or diminished) chord.
+                                h = h.replace(m[i], minorChords[x]);
+                            }
+                            else { // it's a major chord.
+                                h = h.replace(m[i], majorChords[x]);
+                            }
+                        }
+                        else { // the proper key has been set.
+                            h = h.replace(m[i], chords[x]);
+                        }
                     }
                 }
+                this.innerHTML = h;
             }
             if ($(this).hasClass('key')) {
                 key = this.innerHTML;
