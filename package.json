@@ -15,5 +15,5 @@
     "description": "Allows musical transcription of chords in a song sheet.",
     "keywords": [ "chords", "keys", "transpose" ],
     "homepage": "https://github.com/tallpapab/Music",
-    "files": [ README, "Transposer.js" ]
+    "files": [ README, "Transposer.js", PollyWollyDoodle.html" "WayfaringStranger.html" ]
 }
