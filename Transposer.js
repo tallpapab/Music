@@ -6,8 +6,8 @@
     /**
      * Transpose up or down by the specified number of half steps.
      * Looks for and replaces all the chords in the document.
-     * usage: $('.chord').elb_music_transpose(1);  // transpose up one half step.
-     *        $('.chord').elb_music_transpose(-2); // transpose down one step.
+     * usage: $('.key,.chord').elb_music_transpose(1);  // transpose up one half step.
+     *        $('.key,.chord').elb_music_transpose(-2); // transpose down one step.
      * NOTE (or BUG): Chords must be upper case. Minor chords must be of the form Am, not a.
      *      Lower case for the key is OK and interpreted as a minor key.
      */
