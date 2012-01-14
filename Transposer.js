@@ -9,7 +9,7 @@
      * usage: $('.chord').elb_music_transpose(1);  // transpose up one half step.
      *        $('.chord').elb_music_transpose(-2); // transpose down one step.
      * NOTE (or BUG): Chords must be upper case. Minor chords must be of the form Am, not a.
-     * Don't forget to complete unicode sharps and flats.
+     *      Lower case for the key is OK and interpreted as a minor key.
      */
     $.fn.elb_music_transpose = function (theHalfSteps) {
         var chordLetters = 'C D EF G A B',
@@ -25,7 +25,7 @@
                 'A':   ['x',  'C♯', 'D',  'x',  'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
                 'F♯m': ['x',  'C♯', 'D',  'x',  'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
                 'E':   ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
-                'D♭m': ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
+                'C♯m': ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
                 'B':   ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
                 'G♯m': ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
                 'F♯':  ['x',  'C♯', 'x',  'D♯', 'x',  'E♯', 'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
@@ -48,15 +48,32 @@
                 'Dm':  ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
             },
             chords = majorChords,
-            aChord = /[A-G][#b\u266d\u266f]?/g,
+            aNote = /[A-G][#b\u266d\u266f]?/g,
             key,
-            keyName = function(sloppyName) {
-                sloppyName = sloppyName.replace('#', '♯').replace('b', '♭');
-                if (sloppyName[0].match('[a-g]')) {
-                    return sloppyName.toUpperCase() + 'm';
+            keyName = function(rawName) {
+                var m, tonic, quality = '',
+                    aKey = /([a-gA-G][♯♭]?)( minor|m| major|M|)?/;
+                rawName = rawName.replace('#', '♯').replace('b', '♭');
+                m = rawName.match(aKey);
+                if (m) {
+                    if (1 < m.length && m[1]) {
+                        if (m[1].match('[a-g]')) { // minor
+                            tonic = m[1].toUpperCase();
+                            quality = 'm';
+                        }
+                        else {
+                            tonic = m[1];
+                        }
+                        if (2 < m.length && m[2]) {
+                            quality = {'m': 'm', ' minor': 'm', 'M': '', ' major': ''}[m[2]];
+                        }
+                        return tonic + quality;;
+                    }
                 }
-                return sloppyName;
+                alert('What kind of key is "' + rawName + '"?');
+                return rawName;
             };
+
         return this.each(function (theIndex, theElement) {
             var h = this.innerHTML,
                 i, m, x;
@@ -69,7 +86,7 @@
                     chords = majorChords;
                 }
             }
-            m = h.match(aChord);
+            m = h.match(aNote);
             if (m) {
                 for (i = 0; i < m.length; i++) {
                     x = chordLetters.search(m[i][0]);
@@ -81,7 +98,7 @@
                             x -= 1;
                         }
                         x += theHalfSteps;
-                        while (x < 0) { /* JavaScript doesn't do modulo negative numbers. */
+                        while (x < 0) { // JavaScript doesn't do modulo negative numbers.
                             x += chordLetters.length;
                         }
                         x %= chordLetters.length;
@@ -94,7 +111,7 @@
                                 h = h.replace(m[i], majorChords[x]);
                             }
                         }
-                        else { // the proper key has been set.
+                        else { // a proper key has been set.
                             h = h.replace(m[i], chords[x]);
                         }
                     }
@@ -102,10 +119,11 @@
                 this.innerHTML = h;
             }
             if ($(this).hasClass('key')) {
-                key = this.innerHTML;
+                key = keyName(this.innerHTML);
                 chords = chordsInKey[key];
                 if (!chords) {
-                    alert("couldn't find key " + key);
+                    alert('Could not find key "' + key + '".');
+                    chords = majorChords;
                 }
             }
         });
