@@ -13,9 +13,9 @@
      */
     $.fn.elb_music_transpose = function (theHalfSteps) {
         var chordLetters = 'C D EF G A B',
-            majorChords = ['C', 'D\u266d', 'D', 'E\u266d', 'E', 'F', 'F\u266f', 'G', 'A\u266d', 'A', 'B\u266d', 'B'],
-            minorChords = ['C', 'C\u266f', 'D', 'D\u266f', 'E', 'F', 'F\u266f', 'G', 'G\u266f', 'A', 'B\u266d', 'B'],
-            chordsInKey = { // Note: only need cannonical key names.
+            majorTonics = ['C', 'D\u266d', 'D', 'E\u266d', 'E', 'F', 'F\u266f', 'G', 'A\u266d', 'A', 'B\u266d', 'B'],
+            minorTonics = ['C', 'C\u266f', 'D', 'D\u266f', 'E', 'F', 'F\u266f', 'G', 'G\u266f', 'A', 'B\u266d', 'B'],
+            tonesInKey = { // Note: only need cannonical key names.
                 'C':   ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'x',  'B'],
                 'Am':  ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'x',  'B'],
                 'G':   ['C',  'x',  'D',  'x',  'E',  'x',  'F♯', 'G',  'x',  'A',  'x',  'B'],
@@ -47,7 +47,7 @@
                 'F':   ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
                 'Dm':  ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
             },
-            chords = majorChords,
+            tones = majorTonics,
             aNote = /[A-G][#b\u266d\u266f]?/g,
             key,
             keyName = function(rawName) {
@@ -80,10 +80,10 @@
             if ($(this).hasClass('key')) {
                 key = keyName(h);
                 if (key[key.length-1] === 'm' ) {
-                    chords = minorChords;
+                    tones = minorTonics;
                 }
                 else {
-                    chords = majorChords;
+                    tones = majorTonics;
                 }
             }
             m = h.match(aNote);
@@ -105,14 +105,14 @@
                         if (!key) { // then no key was given in the input.
                             // Guess based on chord.
                             if (-1 < h.indexOf('m') && !h.match('maj|dom')) { // then it's a minor (or diminished) chord.
-                                h = h.replace(m[i], minorChords[x]);
+                                h = h.replace(m[i], minorTonics[x]);
                             }
                             else { // it's a major chord.
-                                h = h.replace(m[i], majorChords[x]);
+                                h = h.replace(m[i], majorTonics[x]);
                             }
                         }
                         else { // a proper key has been set.
-                            h = h.replace(m[i], chords[x]);
+                            h = h.replace(m[i], tones[x]);
                         }
                     }
                 }
@@ -120,10 +120,10 @@
             }
             if ($(this).hasClass('key')) {
                 key = keyName(this.innerHTML);
-                chords = chordsInKey[key];
-                if (!chords) {
+                tones = tonesInKey[key];
+                if (!tones) {
                     alert('Could not find key "' + key + '".');
-                    chords = majorChords;
+                    tones = majorTonics;
                 }
             }
         });
