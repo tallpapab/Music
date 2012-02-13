@@ -16,6 +16,38 @@
             majorTonics = ['C', 'D\u266d', 'D', 'E\u266d', 'E', 'F', 'F\u266f', 'G', 'A\u266d', 'A', 'B\u266d', 'B'],
             minorTonics = ['C', 'C\u266f', 'D', 'D\u266f', 'E', 'F', 'F\u266f', 'G', 'G\u266f', 'A', 'B\u266d', 'B'],
             tonesInKey = { // Note: only need cannonical key names.
+                'C':   ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'x',  'B'],
+                'Am':  ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'x',  'B'],
+                'G':   ['C',  'x',  'D',  'x',  'E',  'x',  'F♯', 'G',  'x',  'A',  'x',  'B'],
+                'Em':  ['C',  'x',  'D',  'x',  'E',  'x',  'F♯', 'G',  'x',  'A',  'x',  'B'],
+                'D':   ['x',  'C♯', 'D',  'x',  'E',  'x',  'F♯', 'G',  'x',  'A',  'x',  'B'],
+                'Bm':  ['x',  'C♯', 'D',  'x',  'E',  'x',  'F♯', 'G',  'x',  'A',  'x',  'B'],
+                'A':   ['x',  'C♯', 'D',  'x',  'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
+                'F♯m': ['x',  'C♯', 'D',  'x',  'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
+                'E':   ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
+                'C♯m': ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'A',  'x',  'B'],
+                'B':   ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
+                'G♯m': ['x',  'C♯', 'x',  'D♯', 'E',  'x',  'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
+                'F♯':  ['x',  'C♯', 'x',  'D♯', 'x',  'E♯', 'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
+                'D♯m': ['x',  'C♯', 'x',  'D♯', 'x',  'E♯', 'F♯', 'x',  'G♯', 'x',  'A♯', 'B'],
+                'C♯':  ['B♯', 'C♯', 'x',  'D♯', 'x',  'E♯', 'F♯', 'x',  'G♯', 'x',  'A♯', 'x'],
+                'A♯m': ['B♯', 'C♯', 'x',  'D♯', 'x',  'E♯', 'F♯', 'x',  'G♯', 'x',  'A♯', 'x'],
+                'C♭':  ['x',  'D♭', 'x',  'E♭', 'F♭', 'x',  'G♭', 'x',  'A♭', 'x',  'B♭', 'C♭'],
+                'A♭m': ['x',  'D♭', 'x',  'E♭', 'F♭', 'x',  'G♭', 'x',  'A♭', 'x',  'B♭', 'C♭'],
+                'G♭':  ['x',  'D♭', 'x',  'E♭', 'x',  'F',  'G♭', 'x',  'A♭', 'x',  'B♭', 'C♭'],
+                'E♭m': ['x',  'D♭', 'x',  'E♭', 'x',  'F',  'G♭', 'x',  'A♭', 'x',  'B♭', 'C♭'],
+                'D♭':  ['C',  'D♭', 'x',  'E♭', 'x',  'F',  'G♭', 'x',  'A♭', 'x',  'B♭', 'x'],
+                'B♭m': ['C',  'D♭', 'x',  'E♭', 'x',  'F',  'G♭', 'x',  'A♭', 'x',  'B♭', 'x'],
+                'A♭':  ['C',  'D♭', 'x',  'E♭', 'x',  'F',  'x',  'G',  'A♭', 'x',  'B♭', 'x'],
+                'Fm':  ['C',  'D♭', 'x',  'E♭', 'x',  'F',  'x',  'G',  'A♭', 'x',  'B♭', 'x'],
+                'E♭':  ['C',  'x',  'D',  'E♭', 'x',  'F',  'x',  'G',  'A♭', 'x',  'B♭', 'x'],
+                'Cm':  ['C',  'x',  'D',  'E♭', 'x',  'F',  'x',  'G',  'A♭', 'x',  'B♭', 'x'],
+                'B♭':  ['C',  'x',  'D',  'E♭', 'x',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
+                'Gm':  ['C',  'x',  'D',  'E♭', 'x',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
+                'F':   ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
+                'Dm':  ['C',  'x',  'D',  'x',  'E',  'F',  'x',  'G',  'x',  'A',  'B♭', 'x'],
+            },
+            tonesOffKey = { // Note: only need tones with 'x' above.
                 'C':   ['C',  'C♯', 'D',  'D♯', 'E',  'F',  'F♯', 'G',  'G♯', 'A',  'A♯', 'B'],
                 'Am':  ['C',  'C♯', 'D',  'D♯', 'E',  'F',  'F♯', 'G',  'G♯', 'A',  'A♯', 'B'],
                 'G':   ['C',  'C♯', 'D',  'D♯', 'E',  'F',  'F♯', 'G',  'G♯', 'A',  'A♯', 'B'],
@@ -47,6 +79,7 @@
                 'F':   ['C',  'D♭', 'D',  'E♭', 'E',  'F',  'G♭', 'G',  'A♭', 'A',  'B♭', 'C♭'],
                 'Dm':  ['C',  'D♭', 'D',  'E♭', 'E',  'F',  'G♭', 'G',  'A♭', 'A',  'B♭', 'C♭'],
             },
+            tone,
             tones = majorTonics,
             aNote = /[A-G][#b\u266d\u266f]?/g,
             key,
@@ -73,6 +106,12 @@
                 alert('What kind of key is "' + rawName + '"?');
                 return rawName;
             };
+
+        for (key in tonesOffKey) {
+            for (tone in tonesOffKey[key]) {
+                tonesOffKey[key][tone] = '<span class="offKey">' + tonesOffKey[key][tone] + '</span>';
+            };
+        };
 
         return this.each(function (theIndex, theElement) {
             var h = this.innerHTML,
@@ -112,7 +151,13 @@
                             }
                         }
                         else { // a proper key has been set.
-                            h = h.replace(m[i], tones[x]);
+                            if ('x' === tones[x]) {
+                                h = h.replace(/<.?span[^>]*>/g, ''); // try not to accrete span tags.
+                                h = h.replace(m[i], tonesOffKey[key][x]);
+                            }
+                            else {
+                                h = h.replace(m[i], tones[x]);
+                            }
                         }
                     }
                 }
